@@ -70,5 +70,5 @@ Node combine_ref(Node &l, Node &r) {
     return {l.value + r.value};
 }
 
-using comb_ref_type = Node(*)(Node &a,Node &b);
+using comb_ref_type = Node(*)(Node &,Node &);
 segment_tree<Node, comb_ref_type> tree(SIZE, Identity, combine_ref);
