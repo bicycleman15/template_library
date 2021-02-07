@@ -13,7 +13,7 @@ struct segment_tree {
     }
 
     // Returns the value at index `i`
-    const T& operator[](int i) const {
+    T operator[](int i) {
         assert(0 <= i && i < SZ);
         return data[SZ + i];
     }
@@ -27,7 +27,7 @@ struct segment_tree {
     }
 
     // Returns the result of a left fold of the elements at indices in `[first, last]` over TT
-    T accumulate(int first, int last) const {
+    T accumulate(int first, int last) {
         assert(0 <= first && last < SZ);
         last += 1;
         T left = identity, right = identity;
@@ -66,9 +66,9 @@ segment_tree<Node, comb_type> tree(SIZE, Identity, combine);
 
 // 4
 // passing by reference
-Node combine_ref(const Node &l, const Node &r) {
+Node combine_ref(Node &l, Node &r) {
     return {l.value + r.value};
 }
 
-using comb_ref_type = Node(*)(const Node &a,const Node &b);
+using comb_ref_type = Node(*)(Node &a,Node &b);
 segment_tree<Node, comb_ref_type> tree(SIZE, Identity, combine_ref);
