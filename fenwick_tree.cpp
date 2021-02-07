@@ -49,9 +49,12 @@ struct binary_indexed_tree {
     // Returns the result of accumulating the elements at indices in [l, r]. Requires InverseOperation be defined.
     T accumulate(int l, int r) const {
         static_assert(!std::is_same<decltype(S), std::nullptr_t>::value, "InverseOperation not defined.");
-        assert(0 <= l && l < SZ and 0 <= r && r < SZ);
+        
         if(l > r) return identity;
-        else if(l == 0) return accumulate_prefix(r);
+        
+        assert(l >= 0);
+
+        if(l == 0) return accumulate_prefix(r);
         else return S(accumulate_prefix(r), accumulate_prefix(l - 1));
     }
 };
