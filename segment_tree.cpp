@@ -12,13 +12,13 @@ struct segment_tree {
         data.resize(2 * SZ, identity);
     }
 
-    // Returns the value at index i
+    // Returns the value at index `i`
     const T& operator[](int i) const {
         assert(0 <= i && i < SZ);
         return data[SZ + i];
     }
 
-    // Assigns value v at index i
+    // Assigns value `v` at index `i`
     void assign(int i, T v) {
         assert(0 <= i && i < SZ);
         data[i += SZ] = v;
@@ -26,7 +26,7 @@ struct segment_tree {
             data[i] = TT(data[2 * i], data[2 * i + 1]);
     }
 
-    // Returns the result of a left fold of the elements at indices in [first, last] over TT
+    // Returns the result of a left fold of the elements at indices in `[first, last]` over TT
     T accumulate(int first, int last) const {
         assert(0 <= first && last < SZ);
         last += 1;
